@@ -4,7 +4,8 @@
 
 pkgname=visionfive2-img-gpu
 pkgver=1.17.6210866
-pkgrel=2
+pkgrel=3
+_tag=VF2_v2.11.5
 pkgdesc="This is the GLES and Vullkan implementation provided by Starfive for the IMG_GPU"
 url="https://github.com/starfive-tech/soft_3rdpart/tree/JH7110_VisionFive2_devel"
 arch=(riscv64)
@@ -13,8 +14,8 @@ provides=(opengl-driver vulkan-driver)
 optdepends=('libglvnd: to use opengl'
 	    'vulkan-icd-loader: to use vulkan'
 	    'ocl-icd: to use opencl')
-source=("https://github.com/starfive-tech/soft_3rdpart/raw/JH7110_VisionFive2_devel/IMG_GPU/out/img-gpu-powervr-bin-${pkgver}.tar.gz")
-sha256sums=('8ef5eba77c776e0d4444d819e12c64bfa8eee0ae2cdf90b6eb7a3a9df7bd7ef2')
+source=("https://github.com/starfive-tech/soft_3rdpart/raw/${_tag}/IMG_GPU/out/img-gpu-powervr-bin-${pkgver}.tar.gz")
+sha256sums=('237c44e22453e4be6648a854c4333493d00fe5a2e5bd8775644005758198807c')
 
 package() {
     cd "${srcdir}/img-gpu-powervr-bin-${pkgver}/target"
@@ -44,11 +45,9 @@ package() {
     install -Dm755 usr/local/bin/pvrsrvctl "${pkgdir}/usr/bin/pvrsrvctl"
     install -Dm755 usr/local/bin/rgx_compute_test "${pkgdir}/usr/bin/rgx_compute_test"
     install -Dm755 usr/local/bin/pvr_memory_test "${pkgdir}/usr/bin/pvr_memory_test"
-    install -Dm755 usr/local/bin/pdump "${pkgdir}/usr/bin/pdump"
     install -Dm755 usr/local/bin/ocl_unit_test "${pkgdir}/usr/bin/ocl_unit_test"
     install -Dm755 usr/local/bin/pvrdebug "${pkgdir}/usr/bin/pvrdebug"
     install -Dm755 usr/local/bin/hwperfbin2jsont "${pkgdir}/usr/bin/hwperfbin2jsont"
-    install -Dm755 usr/local/bin/pdump_optimise.py "${pkgdir}/usr/bin/pdump_optimise.py"
     install -Dm755 usr/local/bin/pvrhtb2txt "${pkgdir}/usr/bin/pvrhtb2txt"
     install -Dm755 usr/local/bin/pvr_mutex_perf_test_mx "${pkgdir}/usr/bin/pvr_mutex_perf_test_mx"
     install -Dm755 usr/local/bin/rogue2d_fbctest "${pkgdir}/usr/bin/rogue2d_fbctest"
