@@ -4,8 +4,8 @@
 
 pkgname=visionfive2-img-gpu
 pkgver=1.17.6210866
-pkgrel=3
-_tag=VF2_v2.11.5
+pkgrel=4
+_tag=VF2_v3.0.4
 pkgdesc="This is the GLES and Vullkan implementation provided by Starfive for the IMG_GPU"
 url="https://github.com/starfive-tech/soft_3rdpart/tree/JH7110_VisionFive2_devel"
 arch=(riscv64)
@@ -15,7 +15,7 @@ optdepends=('libglvnd: to use opengl'
 	    'vulkan-icd-loader: to use vulkan'
 	    'ocl-icd: to use opencl')
 source=("https://github.com/starfive-tech/soft_3rdpart/raw/${_tag}/IMG_GPU/out/img-gpu-powervr-bin-${pkgver}.tar.gz")
-sha256sums=('237c44e22453e4be6648a854c4333493d00fe5a2e5bd8775644005758198807c')
+sha256sums=('bb94718c965a1c6d6ee68529e4b85989b08f347ccc8b64d12d8872dd668070d1')
 
 package() {
     cd "${srcdir}/img-gpu-powervr-bin-${pkgver}/target"
