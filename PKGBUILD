@@ -80,6 +80,6 @@ package() {
     cp --no-dereference usr/lib/libusc.so "${pkgdir}/usr/lib/libusc.so"
 
     # Firmware files
-    install -Dm644 lib/firmware/rgx.fw.36.50.54.182 "${pkgdir}/lib/firmware/rgx.fw.36.50.54.182"
-    install -Dm644 lib/firmware/rgx.sh.36.50.54.182 "${pkgdir}/lib/firmware/rgx.sh.36.50.54.182"
+    install -Dm644 lib/firmware/rgx.fw.36.50.54.182 "${pkgdir}/usr/lib/firmware/rgx.fw.36.50.54.182"
+    install -Dm644 lib/firmware/rgx.sh.36.50.54.182 "${pkgdir}/usr/lib/firmware/rgx.sh.36.50.54.182"
 }
