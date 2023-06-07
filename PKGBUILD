@@ -7,15 +7,18 @@ pkgver=1.17.6210866
 pkgrel=4
 _tag=VF2_v3.0.4
 pkgdesc="This is the GLES and Vulkan implementation provided by StarFive for the IMG_GPU"
-url="https://github.com/starfive-tech/soft_3rdpart/tree/JH7110_VisionFive2_devel"
+_3rdpart_repo='https://github.com/starfive-tech/soft_3rdpart'
+url="${_3rdpart_repo}/tree/JH7110_VisionFive2_devel"
 arch=(riscv64)
 license=(custom)
 provides=(opengl-driver vulkan-driver)
 optdepends=('libglvnd: to use opengl'
 	    'vulkan-icd-loader: to use vulkan'
 	    'ocl-icd: to use opencl')
-source=("https://github.com/starfive-tech/soft_3rdpart/raw/${_tag}/IMG_GPU/out/img-gpu-powervr-bin-${pkgver}.tar.gz")
-sha256sums=('bb94718c965a1c6d6ee68529e4b85989b08f347ccc8b64d12d8872dd668070d1')
+source=("${_3rdpart_repo}/raw/${_tag}/IMG_GPU/out/img-gpu-powervr-bin-${pkgver}.tar.gz"
+	'img-gpu-firmware-mkinitcpio.conf')
+sha256sums=('bb94718c965a1c6d6ee68529e4b85989b08f347ccc8b64d12d8872dd668070d1'
+	    '1bab00f54e5d0e6f79c5abfbd50f20bfb29284ddb45974194bd9b4d69e38d3bd')
 options=(!strip)
 
 package() {
@@ -82,4 +85,5 @@ package() {
     # Firmware files
     install -Dm644 lib/firmware/rgx.fw.36.50.54.182 "${pkgdir}/usr/lib/firmware/rgx.fw.36.50.54.182"
     install -Dm644 lib/firmware/rgx.sh.36.50.54.182 "${pkgdir}/usr/lib/firmware/rgx.sh.36.50.54.182"
+    install -Dm644 $srcdir/img-gpu-firmware-mkinitcpio.conf "${pkgdir}/etc/mkinitcpio.conf.d/${pkgname}.conf"
 }
