@@ -4,7 +4,7 @@
 
 pkgname=visionfive2-img-gpu
 pkgver=1.19.6345021
-pkgrel=1
+pkgrel=2
 _tag=VF2_v3.1.5
 pkgdesc="This is the GLES and Vulkan implementation provided by StarFive for the IMG_GPU"
 _3rdpart_repo='https://github.com/starfive-tech/soft_3rdpart'
@@ -63,6 +63,7 @@ package() {
     install -Dm755 usr/local/bin/pvrlogsplit "${pkgdir}/usr/bin/pvrlogsplit"
     install -Dm755 usr/local/bin/pvrlogdump "${pkgdir}/usr/bin/pvrlogdump"
     install -Dm755 usr/local/bin/pvrhwperf "${pkgdir}/usr/bin/pvrhwperf"
+    install -Dm755 usr/local/bin/tqplayer "${pkgdir}/usr/bin/tqplayer"
 
     # Symbolic links
     cp --no-dereference usr/lib/libPVROCL.so "${pkgdir}/usr/lib/libPVROCL.so"
