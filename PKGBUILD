@@ -3,19 +3,22 @@
 # IMG_GPU drivers for VisionFive2 RISC-V boards.
 
 pkgname=visionfive2-img-gpu
-pkgver=1.17.6210866
+pkgver=1.19.6345021
 pkgrel=4
-_tag=VF2_v3.0.4
+_tag=VF2_v3.8.2
 pkgdesc="This is the GLES and Vulkan implementation provided by StarFive for the IMG_GPU"
-url="https://github.com/starfive-tech/soft_3rdpart/tree/JH7110_VisionFive2_devel"
+_3rdpart_repo='https://github.com/starfive-tech/soft_3rdpart'
+url="${_3rdpart_repo}/tree/JH7110_VisionFive2_devel"
 arch=(riscv64)
 license=(custom)
 provides=(opengl-driver vulkan-driver)
 optdepends=('libglvnd: to use opengl'
 	    'vulkan-icd-loader: to use vulkan'
 	    'ocl-icd: to use opencl')
-source=("https://github.com/starfive-tech/soft_3rdpart/raw/${_tag}/IMG_GPU/out/img-gpu-powervr-bin-${pkgver}.tar.gz")
-sha256sums=('bb94718c965a1c6d6ee68529e4b85989b08f347ccc8b64d12d8872dd668070d1')
+source=("img-gpu-powervr-bin-${pkgver}-${_tag}.tar.gz::${_3rdpart_repo}/raw/${_tag}/IMG_GPU/out/img-gpu-powervr-bin-${pkgver}.tar.gz"
+	'img-gpu-firmware-mkinitcpio.conf')
+sha256sums=('9dcaf2084b13e59c4e50a4a288f5de56f8e9ee631627a3e818591675bf61311a'
+            '1bab00f54e5d0e6f79c5abfbd50f20bfb29284ddb45974194bd9b4d69e38d3bd')
 options=(!strip)
 
 package() {
@@ -27,17 +30,17 @@ package() {
     install -Dm644 etc/vulkan/icd.d/icdconf.json "${pkgdir}/etc/vulkan/icd.d/icdconf.json"
 
     # Library files with version
-    install -Dm755 usr/lib/libglslcompiler.so.1.17.6210866 "${pkgdir}/usr/lib/libglslcompiler.so.1.17.6210866"
-    install -Dm755 usr/lib/libpvr_dri_support.so.1.17.6210866 "${pkgdir}/usr/lib/libpvr_dri_support.so.1.17.6210866"
-    install -Dm755 usr/lib/libsrv_um.so.1.17.6210866 "${pkgdir}/usr/lib/libsrv_um.so.1.17.6210866"
-    install -Dm755 usr/lib/libsutu_display.so.1.17.6210866 "${pkgdir}/usr/lib/libsutu_display.so.1.17.6210866"
-    install -Dm755 usr/lib/libGLESv1_CM_PVR_MESA.so.1.17.6210866 "${pkgdir}/usr/lib/libGLESv1_CM_PVR_MESA.so.1.17.6210866"
-    install -Dm755 usr/lib/libPVROCL.so.1.17.6210866 "${pkgdir}/usr/lib/libPVROCL.so.1.17.6210866"
-    install -Dm755 usr/lib/libPVRScopeServices.so.1.17.6210866 "${pkgdir}/usr/lib/libPVRScopeServices.so.1.17.6210866"
-    install -Dm755 usr/lib/libufwriter.so.1.17.6210866 "${pkgdir}/usr/lib/libufwriter.so.1.17.6210866"
-    install -Dm755 usr/lib/libusc.so.1.17.6210866 "${pkgdir}/usr/lib/libusc.so.1.17.6210866"
-    install -Dm755 usr/lib/libVK_IMG.so.1.17.6210866 "${pkgdir}/usr/lib/libVK_IMG.so.1.17.6210866"
-    install -Dm755 usr/lib/libGLESv2_PVR_MESA.so.1.17.6210866 "${pkgdir}/usr/lib/libGLESv2_PVR_MESA.so.1.17.6210866"
+    install -Dm755 usr/lib/libglslcompiler.so.${pkgver} "${pkgdir}/usr/lib/libglslcompiler.so.${pkgver}"
+    install -Dm755 usr/lib/libpvr_dri_support.so.${pkgver} "${pkgdir}/usr/lib/libpvr_dri_support.so.${pkgver}"
+    install -Dm755 usr/lib/libsrv_um.so.${pkgver} "${pkgdir}/usr/lib/libsrv_um.so.${pkgver}"
+    install -Dm755 usr/lib/libsutu_display.so.${pkgver} "${pkgdir}/usr/lib/libsutu_display.so.${pkgver}"
+    install -Dm755 usr/lib/libGLESv1_CM_PVR_MESA.so.${pkgver} "${pkgdir}/usr/lib/libGLESv1_CM_PVR_MESA.so.${pkgver}"
+    install -Dm755 usr/lib/libPVROCL.so.${pkgver} "${pkgdir}/usr/lib/libPVROCL.so.${pkgver}"
+    install -Dm755 usr/lib/libPVRScopeServices.so.${pkgver} "${pkgdir}/usr/lib/libPVRScopeServices.so.${pkgver}"
+    install -Dm755 usr/lib/libufwriter.so.${pkgver} "${pkgdir}/usr/lib/libufwriter.so.${pkgver}"
+    install -Dm755 usr/lib/libusc.so.${pkgver} "${pkgdir}/usr/lib/libusc.so.${pkgver}"
+    install -Dm755 usr/lib/libVK_IMG.so.${pkgver} "${pkgdir}/usr/lib/libVK_IMG.so.${pkgver}"
+    install -Dm755 usr/lib/libGLESv2_PVR_MESA.so.${pkgver} "${pkgdir}/usr/lib/libGLESv2_PVR_MESA.so.${pkgver}"
 
     # Executables
     install -Dm755 usr/local/bin/rgx_triangle_test "${pkgdir}/usr/bin/rgx_triangle_test"
@@ -56,11 +59,11 @@ package() {
     install -Dm755 usr/local/bin/hwperfjsonmerge.py "${pkgdir}/usr/bin/hwperfjsonmerge.py"
     install -Dm755 usr/local/bin/rgx_blit_test "${pkgdir}/usr/bin/rgx_blit_test"
     install -Dm755 usr/local/bin/ocl_extended_test "${pkgdir}/usr/bin/ocl_extended_test"
-    install -Dm755 usr/local/bin/rgx_kicksync_test "${pkgdir}/usr/bin/rgx_kicksync_test"
     install -Dm755 usr/local/bin/pvrtld "${pkgdir}/usr/bin/pvrtld"
     install -Dm755 usr/local/bin/pvrlogsplit "${pkgdir}/usr/bin/pvrlogsplit"
     install -Dm755 usr/local/bin/pvrlogdump "${pkgdir}/usr/bin/pvrlogdump"
     install -Dm755 usr/local/bin/pvrhwperf "${pkgdir}/usr/bin/pvrhwperf"
+    install -Dm755 usr/local/bin/tqplayer "${pkgdir}/usr/bin/tqplayer"
 
     # Symbolic links
     cp --no-dereference usr/lib/libPVROCL.so "${pkgdir}/usr/lib/libPVROCL.so"
@@ -82,4 +85,5 @@ package() {
     # Firmware files
     install -Dm644 lib/firmware/rgx.fw.36.50.54.182 "${pkgdir}/usr/lib/firmware/rgx.fw.36.50.54.182"
     install -Dm644 lib/firmware/rgx.sh.36.50.54.182 "${pkgdir}/usr/lib/firmware/rgx.sh.36.50.54.182"
+    install -Dm644 $srcdir/img-gpu-firmware-mkinitcpio.conf "${pkgdir}/etc/mkinitcpio.conf.d/${pkgname}.conf"
 }
